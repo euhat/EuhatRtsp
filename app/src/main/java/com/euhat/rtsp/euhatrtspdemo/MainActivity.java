@@ -105,7 +105,6 @@ public final class MainActivity extends AppCompatActivity {
 					// url = "rtsp://192.168.1.67:8554/h264";
 					// url = "rtsp://192.168.1.41:554/";
 					// url = "rtsp://admin:admin@192.168.1.224/1";
-					// url = "rtsp://admin:jaya2016@192.168.1.225:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1";
 					mEuhatPlayer.open(url, 8000, 1, 1000, fps, 300);
 
 					mIsStarted = true;
