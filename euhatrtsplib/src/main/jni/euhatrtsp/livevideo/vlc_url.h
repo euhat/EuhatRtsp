@@ -304,7 +304,7 @@ static char *make_URI (const char *path, const char *scheme)
 
         if ((cwd = getcwd(cwd_buf, sizeof(cwd_buf))) == NULL)
             return NULL;
-        if (asprintf (&buf, "%s"DIR_SEP"%s", cwd, path) == -1)
+        if (asprintf (&buf, "%s" DIR_SEP "%s", cwd, path) == -1)
             buf = NULL;
 
         free (cwd);

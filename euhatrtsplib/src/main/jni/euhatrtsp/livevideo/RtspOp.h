@@ -21,14 +21,15 @@
  *  may have a different license, see the respective files.
  */
 #pragma once
+#include <string>
+#include <list>
 #include <unistd.h>
 #include <jni.h>
 #include <android/native_window.h>
 #include <pthread.h>
 #include <stdatomic.h>
 #include "librtspsource.h"
-#include <string>
-#include <list>
+#include "CommonOp.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ using namespace std;
 #define whThreadJoin(_handle) pthread_join(_handle, NULL)
 #define whThreadTerminate(_handle) pthread_cancel(_handle)
 
+#if 0
 #define WhMutex atomic_flag
 
 #define whMutexInit(_handle) *(_handle) = ATOMIC_FLAG_INIT
@@ -50,6 +52,36 @@ using namespace std;
 #define whCondWait(_cond, _mutex)
 
 #define whMutexFini(_handle)
+#else
+struct WhMutexStruct
+{
+	pthread_mutexattr_t attr_;
+	pthread_mutex_t m_;
+};
+#define WhMutexParam WhMutexStruct
+
+#define whMutexInit(_handle) \
+do { \
+	if (pthread_mutexattr_init(&(_handle)->attr_) != 0) { \
+		DBG(("init mutex attr failed.\n")); \
+		break; \
+				} \
+	pthread_mutexattr_settype(&(_handle)->attr_, PTHREAD_MUTEX_RECURSIVE_NP); \
+	pthread_mutex_init(&(_handle)->m_, &(_handle)->attr_); \
+} while (0)
+
+#define whMutexEnter(_handle) pthread_mutex_lock(&(_handle)->m_)
+#define whMutexLeave(_handle) pthread_mutex_unlock(&(_handle)->m_)
+#define whCondWait(_handle, _mutex) pthread_cond_wait(_handle, &(_mutex)->m_)
+
+#define whMutexFini(_handle) \
+do { \
+	pthread_mutex_destroy(&(_handle)->m_); \
+	pthread_mutexattr_destroy(&(_handle)->attr_); \
+} while (0)
+#endif
+
+#define WhMutex WhMutexStruct
 
 class WhMutexGuard
 {

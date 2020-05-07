@@ -35,7 +35,7 @@ RTSPSource::RTSPSource() : ms_(NULL),
     timeout_(0),
     psz_url_(NULL),
     opened_(false),
-    tracks_(NULL),
+//  tracks_(NULL),
     result_code(0),
     b_error(false),
     event_rtsp(0),
@@ -406,14 +406,17 @@ void RTSPSource::close() {
     demux_sys_t *p_sys = this;
     if (isPlay()) {
         isPlay_ = false;
-        if (demuxThread_ != NULL) {
 #ifndef _WIN32
-            pthread_join(demuxThread_,NULL);
+        if (demuxThread_ != 0) {
+            pthread_join(demuxThread_, 0);
+            demuxThread_ = 0;
+        }
 #else
-            pthread_join(demuxThread_);
-#endif
+        if (demuxThread_ != NULL) {
+            pthread_join(demuxThread_,NULL);
             demuxThread_ = NULL;
         }
+#endif
     }
 
     if( this->rtsp_ && this->ms_)   {this->rtsp()->sendTeardownCommand( *this->ms(), NULL );}

@@ -499,9 +499,9 @@ Boolean socketJoinGroupSSM(UsageEnvironment& env, int socket,
 
   struct ip_mreq_source imr;
 #ifdef __ANDROID__
-    imr.imr_multiaddr = groupAddress;
-    imr.imr_sourceaddr = sourceFilterAddr;
-    imr.imr_interface = ReceivingInterfaceAddr;
+    imr.imr_multiaddr.s_addr = groupAddress;
+    imr.imr_sourceaddr.s_addr = sourceFilterAddr;
+    imr.imr_interface.s_addr = ReceivingInterfaceAddr;
 #else
     imr.imr_multiaddr.s_addr = groupAddress;
     imr.imr_sourceaddr.s_addr = sourceFilterAddr;
@@ -525,9 +525,9 @@ Boolean socketLeaveGroupSSM(UsageEnvironment& /*env*/, int socket,
 
   struct ip_mreq_source imr;
 #ifdef __ANDROID__
-    imr.imr_multiaddr = groupAddress;
-    imr.imr_sourceaddr = sourceFilterAddr;
-    imr.imr_interface = ReceivingInterfaceAddr;
+    imr.imr_multiaddr.s_addr = groupAddress;
+    imr.imr_sourceaddr.s_addr = sourceFilterAddr;
+    imr.imr_interface.s_addr = ReceivingInterfaceAddr;
 #else
     imr.imr_multiaddr.s_addr = groupAddress;
     imr.imr_sourceaddr.s_addr = sourceFilterAddr;
