@@ -18,7 +18,7 @@ This is an open source code of rtsp stream player in Android device.
 compile and load to device to run.
 
 ## Notice
-1. The h264 stream must is 1920x1080 resolution.
+1. The h264 stream must be 1920x1080 resolution.
 2. If the h264 stream has no sps frame, you will not see video rendering in EuhatRtsp.
 
 ## Faq
