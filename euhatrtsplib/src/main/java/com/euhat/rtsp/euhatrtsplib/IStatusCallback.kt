@@ -20,9 +20,8 @@
  *  Files in the libjpeg-turbo, libusb, libuvc, rapidjson folder
  *  may have a different license, see the respective files.
  */
+package com.euhat.rtsp.euhatrtsplib
 
-package com.euhat.rtsp.euhatrtsplib;
-
-public interface IStatusCallback {
-    public void onStatus(int type, int param0, int param1);
+interface IStatusCallback {
+    fun onStatus(type: Int, param0: Int, param1: Int)
 }

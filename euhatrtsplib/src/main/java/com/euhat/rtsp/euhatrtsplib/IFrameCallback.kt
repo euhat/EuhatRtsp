@@ -20,11 +20,10 @@
  *  Files in the libjpeg-turbo, libusb, libuvc, rapidjson folder
  *  may have a different license, see the respective files.
  */
+package com.euhat.rtsp.euhatrtsplib
 
-package com.euhat.rtsp.euhatrtsplib;
+import java.nio.ByteBuffer
 
-import java.nio.ByteBuffer;
-
-public interface IFrameCallback {
-	public void onFrame(ByteBuffer frame, int width, int height);
+interface IFrameCallback {
+    fun onFrame(frame: ByteBuffer?, width: Int, height: Int)
 }

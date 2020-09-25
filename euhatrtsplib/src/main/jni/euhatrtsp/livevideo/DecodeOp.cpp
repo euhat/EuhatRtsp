@@ -17,7 +17,7 @@ void EuhatDecoderBase::setOutputMemPool(MemPool *pool)
 
 EuhatDecoderBase *EuhatDecodeOp::genDecoder()
 {
-#if 1
+#if 0
     if (EuhatDecoderHard::canWork()) {
         DBG(("using hard decoder.\n"));
         return new EuhatDecoderHard();

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 /*
  *  EuhatRtsp
  *  library and sample to play and acquire rtsp stream on Android device
@@ -32,7 +33,7 @@ ext {
 	versionCompiler = 25
 	versionTarget = 23
 */
-    versionBuildTool = '28.0.3'
+    versionBuildTool = '29.0.2'
     versionCompiler = 27
     versionTarget = 23
 
@@ -53,6 +54,9 @@ android {
     defaultConfig {
         minSdkVersion 14
 		targetSdkVersion versionTarget
+		ndk {
+			abiFilters 'armeabi-v7a'
+		}
     }
 
     buildTypes {
@@ -61,12 +65,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-	sourceSets {
+	externalNativeBuild {
+		ndkBuild {
+			path "src/main/jni/Android.mk"
+		}
+	}
+
+/*	sourceSets {
 		main {
 			jniLibs.srcDir 'src/main/libs'
 			jni.srcDirs = []
 		}
 	}
+ */
 }
 
 tasks.withType(JavaCompile) {
@@ -105,4 +116,8 @@ dependencies {
 		implementation fileTree(dir: new File(buildDir, 'libs'), include: '*.jar')
 		implementation "com.android.support:support-annotations:${supportLibVersion}"
 	}
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+	mavenCentral()
 }

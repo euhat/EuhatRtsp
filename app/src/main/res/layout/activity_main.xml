@@ -7,14 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.euhat.rtsp.euhatrtspdemo.MainActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-         android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:orientation="vertical">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal">
@@ -30,8 +28,8 @@
                 android:id="@+id/euhatPlayerUrl"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
-                android:text="rtsp://192.168.1.41:554/"
-                android:inputType="textUri" />
+                android:inputType="textUri"
+                android:text="rtsp://192.168.1.5:8554/h264" />
 
         </LinearLayout>
 
